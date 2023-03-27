@@ -13,6 +13,7 @@ export const CreateAsset = () => {
   const [activo, setAssets] = useState({
     // employee_id: "",
     employee_id: "",
+    name:"",
     type: "",
     code: "",
     marca: "",

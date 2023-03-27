@@ -1,8 +1,21 @@
 const connection = require("../config/db.config");
 
-const findAllAsset = async () => {
+const findAllAsset = async (filtros = {}) => {
+
+  let query = "where 1 = 1"
+  if(filtros.name ){
+
+    query += ` AND name = '${filtros.name}'`
+  }
+
+  if(filtros.type ){
+
+    query += ` AND type = '${filtros.type}'`
+  }
+
+
   const rows = await connection
-    .query("SELECT * FROM asset")
+    .query(`SELECT * FROM asset ${query}`)
     .spread((rows) => rows);
 
   return rows;

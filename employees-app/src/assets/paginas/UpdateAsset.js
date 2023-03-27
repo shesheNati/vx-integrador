@@ -19,6 +19,7 @@ export const UpdateAsset = () => {
   const [activo, setAssets] = useState({
     // id: employee.id,
     employee_id: asset.employee_id,
+    name: asset.name,
     type: asset.type,
     code: asset.code,
     marca: asset.marca,

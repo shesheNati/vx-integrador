@@ -6,11 +6,23 @@ import {
   deleteAsset,
 } from "./assetsSlice";
 
-export const getAllAssets = () => {
+export const getAllAssets = (activo = {}) => {
   return async (dispatch, getState) => {
     console.log("assets thunks");
     dispatch(startLoadingAssets());
-    const resp = await fetch(`http://localhost:8080/api/v1/asset`);
+
+    let query = "?" 
+    if(activo.name){
+      query += `name=${activo.name}&`
+    }
+
+    if(activo.type){
+      query += `type=${activo.type}&`
+    }
+
+
+
+    const resp = await fetch(`http://localhost:8080/api/v1/asset${query}`);
 
     const data = await resp.json();
     console.log(data);

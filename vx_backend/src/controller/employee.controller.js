@@ -3,10 +3,14 @@ const employeeModel = require("../model/employee.model");
 
 const findAllEmployee = async (req, res) => {
   try {
-    const employees = await employeeModel.findAllEmployee();
+    const filtros = req.query
+    console.log(filtros)
+
+    const employees = await employeeModel.findAllEmployee(filtros);
 
     res.status(200).json({ data: employees });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ msg: "Algo salió mal", error: error });
   }
 };

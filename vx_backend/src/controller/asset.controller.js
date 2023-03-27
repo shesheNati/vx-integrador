@@ -3,7 +3,11 @@ const employeeModel = require("../model/employee.model");
 
 const findAllAsset = async (req, res) => {
   try {
-    const assets = await assetModel.findAllAsset();
+    const filtros = req.query
+    console.log(filtros)
+
+
+    const assets = await assetModel.findAllAsset(filtros);
 
     res.status(200).json({ data: assets });
   } catch (error) {

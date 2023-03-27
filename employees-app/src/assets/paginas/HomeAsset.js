@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actionDeleteAssets } from "../../store/slices/assets/thunks";
+import { actionDeleteAssets, getAllAssets } from "../../store/slices/assets/thunks";
 
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
@@ -26,6 +26,23 @@ export const HomeAsset = () => {
     });
   };
 
+  const [activo, setAssets] = useState({
+    name: "",
+    type: "",
+  });
+
+  const handleChange = (e) => {
+    setAssets({
+      ...activo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getAllAssets(activo));
+    
+  };
   return (
     <>
       <div>
@@ -35,6 +52,48 @@ export const HomeAsset = () => {
           ) : (
             <h1>Listado de activos de la empresa</h1>
           )}
+
+          <form style={{ width: 500 }}>
+            <div className="mb-3">
+              <label for="name" className="form-label">
+                Nombre:
+              </label>
+              <input
+                name="name"
+                onChange={handleChange}
+                value={activo.name}
+                type="text"
+                className="form-control"
+                id="name"
+                aria-describedby="emailHelp"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label for="type" className="form-label">
+                tipo:
+              </label>
+              <input
+                name="type"
+                onChange={handleChange}
+                value={activo.type}
+                placeholder="electrodomestico"
+                type="text"
+                className="form-control"
+                id="type"
+                required
+                aria-describedby="emailHelp"
+              />
+            </div>
+
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="btn btn-primary"
+            >
+              Buscar
+            </button>
+          </form>
 
           <table class="table">
             <thead>

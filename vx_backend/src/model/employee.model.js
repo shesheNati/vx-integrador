@@ -1,8 +1,27 @@
 const connection = require("../config/db.config");
 
-const findAllEmployee = async () => {
+const findAllEmployee = async (filtros = {}) => {
+
+  let query = "where 1 = 1"
+  if(filtros.first_name ){
+
+    query += ` AND first_name = '${filtros.first_name}'`
+  }
+
+  if(filtros.team_id ){
+
+    query += ` AND team_id = ${filtros.team_id}`
+  }
+
+
+  if(filtros.rol ){
+
+    query += ` AND rol = '${filtros.rol}'`
+  }
+
+  
   const rows = await connection
-    .query("SELECT * FROM employee")
+    .query(`SELECT * FROM employee ${query}`)
     .spread((rows) => rows);
 
   return rows;

@@ -8,10 +8,25 @@ import {
 } from "./employeesSlice";
 //import dataJson from '../../../employees.json';
 
-export const getEmployees = () => {
+export const getEmployees = (empleado = {}) => {
   return async (dispatch, getState) => {
     dispatch(startLoadingEmployees());
-    const resp = await fetch(`http://localhost:8080/api/v1/employee`);
+    let query = "?" 
+    if(empleado.first_name){
+      query += `first_name=${empleado.first_name}&`
+    }
+
+    if(empleado.rol){
+      query += `rol=${empleado.rol}&`
+    }
+
+    if(empleado.team_id){
+      query += `team_id=${empleado.team_id}`
+    }
+
+
+    const resp = await fetch(`http://localhost:8080/api/v1/employee${query}`);
+    console.log(`http://localhost:8080/api/v1/employee${query}`)
 
     const data = await resp.json();
     console.log(data);
