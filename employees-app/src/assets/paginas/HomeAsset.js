@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actionDeleteAssets, getAllAssets } from "../../store/slices/assets/thunks";
+import {
+  actionDeleteAssets,
+  getAllAssets,
+} from "../../store/slices/assets/thunks";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPencil,
+  faPlus,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
@@ -41,7 +51,6 @@ export const HomeAsset = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getAllAssets(activo));
-    
   };
   return (
     <>
@@ -52,6 +61,10 @@ export const HomeAsset = () => {
           ) : (
             <h1>Listado de activos de la empresa</h1>
           )}
+
+          <Link className="btn btn-info" to="/create">
+            Agregar activo
+          </Link>
 
           <form style={{ width: 500 }}>
             <div className="mb-3">
@@ -116,9 +129,14 @@ export const HomeAsset = () => {
                     <td>{type}</td>
                     <td>{code}</td>
                     <td>
+                      {/* <Link className="btn btn-info" to="/create">
+                        <FontAwesomeIcon icon={faPlus} />
+                      </Link> */}
+
                       <Link to={`/update/${asset_id}`} className="btn btn-info">
-                        Editar
+                        <FontAwesomeIcon icon={faPencil} />
                       </Link>
+
                       <button
                         type="button"
                         className="btn btn-danger"
@@ -126,7 +144,7 @@ export const HomeAsset = () => {
                           eliminar(asset_id);
                         }}
                       >
-                        Eliminar
+                        <FontAwesomeIcon icon={faTrashAlt} />
                       </button>
                     </td>
                   </tr>

@@ -9,14 +9,14 @@ export const Navbar = () => {
             Home
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             className={({ isActive }) =>
               `nav-item nav-link ${isActive ? "active" : ""}`
             }
             to="/add"
           >
             Agregar
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             className={({ isActive }) =>
@@ -26,7 +26,7 @@ export const Navbar = () => {
           >
             Assets
           </NavLink>
-
+{/* 
           <NavLink
             className={({ isActive }) =>
               `nav-item nav-link ${isActive ? "active" : ""}`
@@ -34,7 +34,7 @@ export const Navbar = () => {
             to="/create"
           >
             AddAsset
-          </NavLink>
+          </NavLink> */}
 
         </div>
       </div>

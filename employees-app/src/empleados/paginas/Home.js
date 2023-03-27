@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { actionDeleteEmployees, getEmployees } from "../../store/slices/employees/thunks";
+import {
+  actionDeleteEmployees,
+  getEmployees,
+} from "../../store/slices/employees/thunks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPencil,
+  faPlus,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
@@ -26,16 +35,11 @@ export const Home = () => {
     });
   };
 
- 
-
-
   const [empleado, setEmpleado] = useState({
     // employee_id: "",
     first_name: "",
     team_id: "",
     rol: "",
-   
-   
   });
 
   const handleChange = (e) => {
@@ -51,7 +55,7 @@ export const Home = () => {
     // dispatch(addEmployee(empleado));
     // console.log(empleado);
     // navigate("/home");
-    console.log(empleado)
+    console.log(empleado);
     console.log("handlet submit");
     dispatch(getEmployees(empleado));
   };
@@ -65,6 +69,10 @@ export const Home = () => {
           ) : (
             <h1>Listado de empleados</h1>
           )}
+
+          <Link className="btn btn-info" to="/add">
+            Agregar empleado
+          </Link>
 
           <form style={{ width: 500 }}>
             <div className="mb-3">
@@ -83,20 +91,20 @@ export const Home = () => {
               />
             </div>
             <div className="mb-3">
-        <label for="team_id" className="form-label">
-          Equipo Id:
-        </label>
-        <input
-          name="team_id"
-          onChange={handleChange}
-          value={empleado.team_id}
-          type="number"
-          className="form-control"
-          id="team_id"
-          aria-describedby="emailHelp"
-        />
-      </div>
-            
+              <label for="team_id" className="form-label">
+                Equipo Id:
+              </label>
+              <input
+                name="team_id"
+                onChange={handleChange}
+                value={empleado.team_id}
+                type="number"
+                className="form-control"
+                id="team_id"
+                aria-describedby="emailHelp"
+              />
+            </div>
+
             <div className="mb-3">
               <label for="rol" className="form-label">
                 Rol:
@@ -112,8 +120,7 @@ export const Home = () => {
                 aria-describedby="emailHelp"
               />
             </div>
-          
-   
+
             <button
               type="submit"
               onClick={handleSubmit}
@@ -127,7 +134,7 @@ export const Home = () => {
             <thead>
               <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Nombre y Apellido</th>
+                <th scope="col">Empleado</th>
                 <th scope="col">Cuit</th>
                 <th scope="col">Equipo Id</th>
                 <th scope="col">Rol</th>
@@ -135,39 +142,52 @@ export const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {employees.map(({ employee_id, first_name, last_name, cuit, rol, team_id }) => {
-                return (
-                  <tr>
-                    <th scope="row">{employee_id}</th>
-                    <td>
-                      {first_name} {last_name}
-                    </td>
-                    <td>{cuit}</td>
-                    <td>{team_id}</td>
-                    <td>{rol}</td>
-                    <td>
-                      <Link
-                        to={`/edit/${employee_id}`}
-                        className="btn btn-info"
-                      >
-                        Editar
-                      </Link>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={() => {
-                          eliminar(employee_id);
-                        }}
-                      >
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {employees.map(
+                ({
+                  employee_id,
+                  first_name,
+                  last_name,
+                  cuit,
+                  rol,
+                  team_id,
+                }) => {
+                  return (
+                    <tr>
+                      <th scope="row">{employee_id}</th>
+                      <td>
+                        {first_name} {last_name}
+                      </td>
+                      <td>{cuit}</td>
+                      <td>{team_id}</td>
+                      <td>{rol}</td>
+                      <td>
+                        {/* <Link className="btn btn-info" to="/add">
+                          <FontAwesomeIcon icon={faPlus} />
+                        </Link> */}
+
+                        <Link
+                          to={`/edit/${employee_id}`}
+                          className="btn btn-info"
+                        >
+                          <FontAwesomeIcon icon={faPencil} />
+                        </Link>
+
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() => {
+                            eliminar(employee_id);
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
             </tbody>
           </table>
-  
         </div>
       </div>
     </>
