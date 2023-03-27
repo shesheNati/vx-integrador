@@ -1,0 +1,37 @@
+{
+    "employees": [
+        {
+            "id": 1,
+            "firstname":"Laura",
+            "lastname": "Gomez",
+            "email": "correo@hotmail.com",
+            "phone_number": 123456789,
+            "hire_date":"4/3/2020",
+            "salary":"$ 90.000",
+            "commission_pct":"%20"
+
+        },
+        {
+            "id":2,
+            "firstname":"Juan",
+            "lastname": "Perez",
+            "email": "correo@hotmail.com",
+            "phone_number": 123456789,
+            "hire_date":"7/9/2022",
+            "salary":"$ 80.000",
+            "commission_pct":"%1"
+
+        },
+        {
+            "id":3,
+            "firstname":"Fulanito",
+            "lastname": "Cosme",
+            "email": "correo@hotmail.com",
+            "phone_number": 123456789,
+            "hire_date":"13/5/2019",
+            "salary":"$ 100.000",
+            "commission_pct":"%5"
+
+        }
+    ]
+}
